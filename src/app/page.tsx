@@ -54,34 +54,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Collection Section */}
+      {/* Specialized Testing & Artisan Pieces Section */}
       <section id="collection" className="py-24 px-6 md:px-24">
         <div className="flex justify-between items-end mb-16">
           <div>
-            <h6 className="text-[10px] uppercase tracking-[0.3em] font-semibold mb-2 text-silver">Our Workshop</h6>
-            <h2 className="text-4xl font-serif">Featured Collection</h2>
+            <h6 className="text-[10px] uppercase tracking-[0.3em] font-semibold mb-2 text-gold">Exclusive Specialty</h6>
+            <h2 className="text-4xl font-serif">Signature Testing & Artisan Pieces</h2>
           </div>
-          <button className="text-gray-400 border-b border-gray-800 pb-1 hover:text-white transition-all text-sm tracking-widest uppercase">Explore All</button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <ProductCard
-            name="Classic Silver Band"
-            category="Sterling Silver"
-            price="₹ 3,990"
-            image="https://images.unsplash.com/photo-1544256718-3bcf237f3974?q=80&w=2000"
+            name="Murugan Peacock Vel Pendant"
+            category="Premium Testing & Design"
+            price="Contact for Pricing"
+            image="/images/products/vel-peacock.jpg"
           />
           <ProductCard
-            name="Regal Gold Pendant"
-            category="22K Solid Gold"
-            price="₹ 24,500"
-            image="https://images.unsplash.com/photo-1599643478518-a744c517c29b?q=80&w=2000"
+            name="Artisan Vel Bracelet"
+            category="Custom Silver Work"
+            price="Contact for Pricing"
+            image="/images/products/vel-bracelet.jpg"
           />
           <ProductCard
-            name="Artisan Statement Chain"
-            category="Premium Silver"
-            price="₹ 12,800"
-            image="https://images.unsplash.com/photo-1629241060972-e0c1280ee3f0?q=80&w=2000"
+            name="Signature OM Vel Bracelet"
+            category="Fine Silver Craft"
+            price="Contact for Pricing"
+            image="/images/products/vel-om-bracelet.jpg"
           />
         </div>
       </section>
