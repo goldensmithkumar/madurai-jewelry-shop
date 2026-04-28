@@ -1,55 +1,87 @@
 import ProductCard from "@/components/ProductCard";
+import Logo from "@/components/Logo";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Redesigned Hero Section */}
       <section className="min-h-screen flex flex-col items-center justify-center pt-24 px-6 bg-[radial-gradient(circle_at_center,_#1a1a1a_0%,_#0a0a0a_100%)]">
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch h-full py-12">
+        <div className="max-w-[1500px] mx-auto w-full flex flex-col items-center py-12 px-6">
 
-          {/* Ear Piercing Highlight */}
-          <a href="#piercing" className="group glass rounded-[2.5rem] overflow-hidden flex flex-col relative hover:border-gold/30 transition-all duration-700 h-[400px] md:h-auto">
-            <img
-              src="/images/ear-piercing.png"
-              alt="Ear Piercing"
-              className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-1000"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            <div className="mt-auto p-10 z-10">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-gold font-bold mb-2 block">Workshop Service</span>
-              <h3 className="text-3xl font-serif">Ear Piercing</h3>
-              <p className="text-gray-400 text-xs mt-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">Safe, precise, and hygienic artistry.</p>
+          {/* Top Brand Header */}
+          <div className="text-center mb-12 z-10">
+            <div className="mb-10 transition-transform duration-1000 hover:scale-105">
+              <Logo className="h-20 md:h-28 w-auto mx-auto" />
             </div>
-          </a>
-
-          {/* Central Branding & Collection */}
-          <div className="flex flex-col items-center justify-center text-center p-8 z-10 order-first md:order-none">
-            <h1 className="text-4xl md:text-5xl font-serif mb-8 tracking-tight leading-tight">
-              <span className="gold-text">Madurai Gold & Silver</span><br />
-              <span className="silver-text text-3xl">Testing Centre</span>
+            <h1 className="text-3xl md:text-5xl font-serif mb-6 tracking-[0.3em] leading-tight flex flex-col items-center">
+              <span className="gold-text whitespace-nowrap">GOLD & SILVER</span>
             </h1>
-            <p className="text-gray-400 text-sm mb-10 max-w-xs font-light leading-relaxed">
-              Excellence in every detail. Craftsmanship that lasts for generations.
+            <div className="h-[2px] w-32 bg-gradient-to-r from-transparent via-gold/50 to-transparent mx-auto mb-8"></div>
+            <p className="text-gray-400 text-[10px] md:text-xs uppercase tracking-[0.6em] mb-10 max-w-md mx-auto leading-loose italic">
+              Excellence in every detail.
             </p>
-            <a href="#collection" className="px-12 py-5 bg-white text-black rounded-full font-bold hover:bg-gold hover:text-white transition-all duration-500 shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-gold/20">
-              View Collection
+            <a href="#collection" className="px-12 py-4 bg-white text-black rounded-full text-[10px] uppercase tracking-widest font-black hover:bg-gold hover:text-white transition-all duration-500 shadow-2xl hover:shadow-gold/40">
+              Explore Collection
             </a>
           </div>
 
-          {/* Laser Engraving Highlight */}
-          <a href="#engraving" className="group glass rounded-[2.5rem] overflow-hidden flex flex-col relative hover:border-silver/30 transition-all duration-700 h-[400px] md:h-auto">
-            <img
-              src="/images/laser-engraving.png"
-              alt="Laser Engraving"
-              className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-1000"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            <div className="mt-auto p-10 z-10">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-silver font-bold mb-2 block">Customization</span>
-              <h3 className="text-3xl font-serif">Laser Engraving</h3>
-              <p className="text-gray-400 text-xs mt-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">Your signature, precisely etched.</p>
-            </div>
-          </a>
+          {/* Balanced 3-Card Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 items-start w-full mt-4">
+
+            {/* Left Card: Ear Piercing */}
+            <a href="#piercing" className="group glass rounded-[3rem] overflow-hidden flex flex-col items-center justify-center relative hover:border-gold/30 transition-all duration-700 aspect-square w-full shadow-2xl">
+              <img
+                src="/images/ear-piercing.png"
+                alt="Ear Piercing"
+                className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 group-hover:scale-110 transition-all duration-1000"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/95"></div>
+              <div className="relative z-10 p-10 text-center transition-transform duration-700 group-hover:scale-105">
+                <span className="text-[10px] uppercase tracking-[0.6em] text-gold font-bold mb-6 block">Workshop</span>
+                <h3 className="text-3xl md:text-4xl font-serif mb-6 leading-tight">Ear<br />Piercing</h3>
+                <div className="h-[1px] w-12 bg-gold/30 mx-auto mb-6 transition-all duration-700 group-hover:w-24"></div>
+                <p className="text-gray-400 text-xs md:text-sm opacity-0 group-hover:opacity-100 transition-all duration-700 max-w-xs mx-auto leading-relaxed h-0 group-hover:h-auto overflow-hidden">
+                  Safe, precise, and hygienic artistry handled with medical-grade precision.
+                </p>
+              </div>
+            </a>
+
+            {/* Middle Card: XRF Testing Services */}
+            <a href="#xrf" className="group glass rounded-[3rem] overflow-hidden flex flex-col items-center justify-center relative border-gold/20 border hover:border-gold/50 transition-all duration-700 aspect-square w-full shadow-2xl">
+              <img
+                src="/images/xrf-testing.png"
+                alt="XRF Testing"
+                className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-1000"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-gold/10 via-black/60 to-black/95"></div>
+              <div className="relative z-10 p-10 text-center transition-transform duration-700 group-hover:scale-105">
+                <span className="text-[10px] uppercase tracking-[0.6em] text-gold font-black mb-6 block">Advanced Tech</span>
+                <h3 className="text-3xl md:text-4xl font-serif mb-6 leading-tight">XRF<br />Testing</h3>
+                <div className="h-[1px] w-12 bg-gold/50 mx-auto mb-6 transition-all duration-700 group-hover:w-24"></div>
+                <p className="text-gray-400 text-xs md:text-sm opacity-0 group-hover:opacity-100 transition-all duration-700 max-w-xs mx-auto leading-relaxed h-0 group-hover:h-auto overflow-hidden">
+                  Instant, non-destructive analysis for precise gold and silver purity.
+                </p>
+              </div>
+            </a>
+
+            {/* Right Card: Laser Engraving */}
+            <a href="#engraving" className="group glass rounded-[3rem] overflow-hidden flex flex-col items-center justify-center relative hover:border-silver/30 transition-all duration-700 aspect-square w-full shadow-2xl">
+              <img
+                src="/images/laser-engraving.png"
+                alt="Laser Engraving"
+                className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 group-hover:scale-110 transition-all duration-1000"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/95"></div>
+              <div className="relative z-10 p-10 text-center transition-transform duration-700 group-hover:scale-105">
+                <span className="text-[10px] uppercase tracking-[0.6em] text-silver font-bold mb-6 block">Custom</span>
+                <h3 className="text-4xl md:text-5xl font-serif mb-6 leading-tight">Laser<br />Engraving</h3>
+                <div className="h-[1px] w-12 bg-silver/30 mx-auto mb-6 transition-all duration-700 group-hover:w-24"></div>
+                <p className="text-gray-400 text-xs md:text-sm opacity-0 group-hover:opacity-100 transition-all duration-700 max-w-xs mx-auto leading-relaxed h-0 group-hover:h-auto overflow-hidden">
+                  Precision etching for your most cherished memories and signatures.
+                </p>
+              </div>
+            </a>
+          </div>
 
         </div>
       </section>
@@ -176,7 +208,10 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-20 text-center opacity-60">
-        <p className="text-[10px] uppercase tracking-[0.3em] font-light mb-4">Madurai Gold and Silver Testing Centre &copy; 2026</p>
+        <p className="text-[10px] uppercase tracking-[0.3em] font-light mb-4">Madurai Gold and Silver &copy; 2026</p>
+        <div className="flex justify-center mb-4">
+          <Logo className="h-6 w-auto grayscale opacity-50" />
+        </div>
         <div className="gold-text font-serif text-2xl">Precision Testing. Artisan Craftsmanship.</div>
       </footer>
     </main>

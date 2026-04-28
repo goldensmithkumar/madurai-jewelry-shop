@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Madurai Gold and Silver Testing Centre",
+  title: "Madurai Gold and Silver",
   description: "Excellence in gold and silver testing, ear piercing, and laser engraving in Madurai.",
 };
 

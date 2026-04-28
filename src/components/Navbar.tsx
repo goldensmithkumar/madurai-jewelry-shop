@@ -1,11 +1,13 @@
 import Link from "next/link";
+import Logo from "./Logo";
 
 export default function Navbar() {
     return (
         <nav className="fixed top-0 w-full z-50 glass px-6 py-4 flex justify-between items-center transition-all duration-300">
-            <div className="text-xl font-serif tracking-tight">
-                <span className="gold-text">Madurai Gold & Silver</span> <span className="silver-text text-sm">Testing Centre</span>
-            </div>
+            <Link href="/" className="flex items-center gap-3 group">
+                <Logo className="h-8 w-auto transition-transform duration-500 group-hover:scale-105" />
+                <span className="gold-text text-xl font-serif tracking-tight border-l border-white/10 pl-3">Gold & Silver</span>
+            </Link>
 
             <div className="hidden md:flex space-x-10 text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium">
                 <Link href="/" className="hover:text-white transition-colors relative group">
