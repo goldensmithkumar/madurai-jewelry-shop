@@ -24,9 +24,9 @@ export default function Home() {
 
           {/* Central Branding & Collection */}
           <div className="flex flex-col items-center justify-center text-center p-8 z-10 order-first md:order-none">
-            <h1 className="text-4xl md:text-6xl font-serif mb-8 tracking-tight leading-tight">
-              <span className="gold-text">Madurai</span><br />
-              <span className="silver-text">Gold & Silver</span>
+            <h1 className="text-4xl md:text-5xl font-serif mb-8 tracking-tight leading-tight">
+              <span className="gold-text">Madurai Gold & Silver</span><br />
+              <span className="silver-text text-3xl">Testing Centre</span>
             </h1>
             <p className="text-gray-400 text-sm mb-10 max-w-xs font-light leading-relaxed">
               Excellence in every detail. Craftsmanship that lasts for generations.
@@ -177,8 +177,8 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-20 text-center opacity-60">
-        <p className="text-[10px] uppercase tracking-[0.3em] font-light mb-4">Madurai Gold and Silver Shop &copy; 2026</p>
-        <div className="gold-text font-serif text-2xl">Crafting Excellence Since Generations.</div>
+        <p className="text-[10px] uppercase tracking-[0.3em] font-light mb-4">Madurai Gold and Silver Testing Centre &copy; 2026</p>
+        <div className="gold-text font-serif text-2xl">Precision Testing. Artisan Craftsmanship.</div>
       </footer>
     </main>
 
