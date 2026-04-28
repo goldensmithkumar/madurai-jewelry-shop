@@ -20,10 +20,26 @@ export default function Navbar() {
 
     return (
         <nav className="fixed top-0 w-full z-50 glass px-4 md:px-6 py-4 flex justify-between items-center transition-all duration-300">
-            <Link href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
-                <Logo className="h-7 md:h-8 w-auto transition-transform duration-500 group-hover:scale-105" />
-                <span className="gold-text text-lg md:text-xl font-serif tracking-tight border-l border-white/10 pl-2 md:pl-3 whitespace-nowrap">Gold & Silver</span>
-            </Link>
+            <div className="flex items-center gap-3">
+                {/* Mobile Menu Toggle */}
+                <button
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    className="lg:hidden p-2 text-white hover:text-gold transition-colors -ml-2"
+                >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {isMenuOpen ? (
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        ) : (
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        )}
+                    </svg>
+                </button>
+
+                <Link href="/" className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
+                    <Logo className="h-7 md:h-8 w-auto transition-transform duration-500 group-hover:scale-105" />
+                    <span className="gold-text text-lg md:text-xl font-serif tracking-tight border-l border-white/10 pl-2 md:pl-3 whitespace-nowrap">Gold & Silver</span>
+                </Link>
+            </div>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex space-x-10 text-[12px] uppercase tracking-[0.2em] text-gray-200 font-semibold">
@@ -87,35 +103,20 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                <Link href="#contact" className="hidden md:block text-[10px] md:text-xs uppercase tracking-widest text-[#d4af37] px-4 md:px-6 py-2 rounded-full border border-[#d4af37]/20 hover:bg-[#d4af37]/10 transition-all font-semibold whitespace-nowrap">
+                <Link href="#contact" className="text-[10px] md:text-xs uppercase tracking-widest text-[#d4af37] px-4 md:px-6 py-2 rounded-full border border-[#d4af37]/20 hover:bg-[#d4af37]/10 transition-all font-semibold whitespace-nowrap">
                     {t.nav.contact}
                 </Link>
-
-                {/* Mobile Menu Toggle */}
-                <button
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="lg:hidden p-2 text-white hover:text-gold transition-colors"
-                >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        {isMenuOpen ? (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                        ) : (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                        )}
-                    </svg>
-                </button>
             </div>
 
             {/* Mobile Navigation Menu */}
             <div className={`lg:hidden fixed inset-0 z-40 transition-all duration-500 ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-xl" onClick={() => setIsMenuOpen(false)}></div>
-                <div className={`absolute top-0 right-0 w-4/5 h-full bg-[#0a0a0a] border-l border-white/10 p-8 pt-24 transition-transform duration-500 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                <div className={`absolute top-0 left-0 w-4/5 h-full bg-[#0a0a0a] border-r border-white/10 p-8 pt-24 transition-transform duration-500 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                     <div className="flex flex-col space-y-8 text-sm uppercase tracking-[0.2em] text-gray-300 font-semibold">
                         <Link href="/" onClick={() => setIsMenuOpen(false)} className="hover:text-gold transition-colors">{t.nav.home}</Link>
                         <Link href="/collection" onClick={() => setIsMenuOpen(false)} className="hover:text-gold transition-colors">{t.nav.collection}</Link>
                         <Link href="#piercing" onClick={() => setIsMenuOpen(false)} className="hover:text-gold transition-colors">{t.nav.piercing}</Link>
                         <Link href="#engraving" onClick={() => setIsMenuOpen(false)} className="hover:text-gold transition-colors">{t.nav.engraving}</Link>
-                        <Link href="#contact" onClick={() => setIsMenuOpen(false)} className="text-gold border border-gold/20 rounded-full px-6 py-3 text-center">{t.nav.contact}</Link>
                     </div>
                 </div>
             </div>
