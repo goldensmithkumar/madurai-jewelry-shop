@@ -44,3 +44,41 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Language Specific Fonts & Styling */
+.lang-ta,
+.lang-hi,
+.lang-te {
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.lang-ta h1,
+.lang-ta h2,
+.lang-ta h3 {
+  font-weight: 700;
+}
+
+.lang-hi h1,
+.lang-hi h2,
+.lang-hi h3 {
+  font-weight: 700;
+}
+
+.lang-te h1,
+.lang-te h2,
+.lang-te h3 {
+  font-weight: 700;
+}
+
+.lang-switch-btn {
+  @apply text-[10px] uppercase tracking-widest px-3 py-1 rounded-md transition-all duration-300;
+}
+
+.lang-switch-btn.active {
+  @apply bg-gold/20 text-gold border border-gold/30;
+}
+
+.lang-switch-btn:not(.active) {
+  @apply text-gray-500 hover:text-white;
+}
