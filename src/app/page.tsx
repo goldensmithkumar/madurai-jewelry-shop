@@ -123,11 +123,64 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Contact Section */}
+      <section id="contact" className="py-24 px-6 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div>
+            <h6 className="text-[10px] uppercase tracking-[0.3em] font-semibold mb-4 text-gold/60">Connect With Us</h6>
+            <h2 className="text-5xl font-serif mb-8 leading-tight">Visit Our Workshop in <span className="gold-text">Madurai</span></h2>
+            <p className="text-gray-400 text-lg mb-12 font-light leading-relaxed">
+              Experience the artistry of traditional gold and silver smithing. Our artisans are ready to assist you with custom designs, piercings, and engravings.
+            </p>
+
+            <div className="space-y-8">
+              <div className="flex gap-6 items-start">
+                <div className="w-12 h-12 rounded-full border border-gold/20 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </div>
+                <div>
+                  <h4 className="text-xs uppercase tracking-widest text-[#d4af37] mb-2 font-bold">Location</h4>
+                  <p className="text-gray-300 font-light leading-relaxed">
+                    24, SPR Complex<br />
+                    PatcharsiKara sr, Madurai 1
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-6 items-start">
+                <div className="w-12 h-12 rounded-full border border-gold/20 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                </div>
+                <div>
+                  <h4 className="text-xs uppercase tracking-widest text-[#d4af37] mb-2 font-bold">Contact Person</h4>
+                  <p className="text-white text-xl font-serif mb-2">Suresh</p>
+                  <p className="text-gray-300 font-light">
+                    +91 78450 23969<br />
+                    +91 96882 53635
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="glass p-1 rounded-[3rem] overflow-hidden group">
+            <div className="bg-[#111] p-12 rounded-[2.8rem] space-y-6">
+              <h3 className="text-2xl font-serif mb-4">Send a Message</h3>
+              <input type="text" placeholder="Your Name" className="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-gold/50 outline-none transition-all" />
+              <input type="email" placeholder="Your Email" className="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-gold/50 outline-none transition-all" />
+              <textarea placeholder="Tell us about your requirement..." className="w-full bg-white/5 border border-white/10 p-4 rounded-xl h-32 focus:border-gold/50 outline-none transition-all"></textarea>
+              <button className="w-full py-4 bg-gold text-black rounded-xl font-bold hover:bg-white transition-all duration-500 shadow-xl shadow-gold/10 hover:shadow-white/10">Submit Request</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="py-20 text-center opacity-60">
         <p className="text-[10px] uppercase tracking-[0.3em] font-light mb-4">Madurai Gold and Silver Shop &copy; 2026</p>
         <div className="gold-text font-serif text-2xl">Crafting Excellence Since Generations.</div>
       </footer>
     </main>
+
   );
 }

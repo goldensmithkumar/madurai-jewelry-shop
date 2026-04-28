@@ -27,9 +27,9 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center space-x-6">
-                <button className="text-xs uppercase tracking-widest text-[#d4af37] px-6 py-2 rounded-full border border-[#d4af37]/20 hover:bg-[#d4af37]/10 transition-all font-semibold">
+                <Link href="#contact" className="text-xs uppercase tracking-widest text-[#d4af37] px-6 py-2 rounded-full border border-[#d4af37]/20 hover:bg-[#d4af37]/10 transition-all font-semibold">
                     Contact
-                </button>
+                </Link>
             </div>
         </nav>
     );
