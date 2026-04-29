@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import ProductCard from "@/components/ProductCard";
 import Logo from "@/components/Logo";
 import { useLanguage } from "@/context/LanguageContext";
@@ -9,79 +10,82 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      {/* Redesigned Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center pt-24 px-6 bg-[radial-gradient(circle_at_center,_#1a1a1a_0%,_#0a0a0a_100%)]">
-        <div className="max-w-[1500px] mx-auto w-full flex flex-col items-center py-12 px-6">
+      {/* Redesigned Hero Section - Now strictly fits viewport */}
+      <section className="h-[100dvh] min-h-[600px] overflow-hidden flex flex-col items-center justify-center pt-[80px] md:pt-[100px] pb-4 px-4 md:px-6 bg-[radial-gradient(circle_at_center,_#1a1a1a_0%,_#0a0a0a_100%)] relative">
+        <div className="max-w-[1400px] mx-auto w-full flex flex-col items-center flex-1 justify-center">
 
           {/* Top Brand Header */}
-          <div className="text-center mb-8 md:mb-12 z-10">
-            <div className="mb-6 md:mb-10 transition-transform duration-1000 hover:scale-105">
-              <Logo className="h-16 md:h-28 w-auto mx-auto" />
+          <div className="text-center mb-2 md:mb-4 z-10 w-full flex flex-col items-center">
+            <div className="mb-2 md:mb-3 transition-transform duration-1000 hover:scale-105">
+              <Logo className="h-8 md:h-12 lg:h-16 w-auto mx-auto brightness-150 drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]" />
             </div>
-            <h1 className="text-2xl md:text-5xl font-serif mb-4 md:mb-6 tracking-[0.2em] md:tracking-[0.3em] leading-tight flex flex-col items-center">
-              <span className="gold-text whitespace-nowrap">{t.hero.title}</span>
+            <h1 className="text-xl md:text-4xl lg:text-5xl font-serif mb-1 md:mb-2 tracking-[0.2em] md:tracking-[0.4em] leading-tight mt-1">
+              <span className="gold-text whitespace-nowrap drop-shadow-[0_0_20px_rgba(212,175,55,0.5)]">{t.hero.title}</span>
             </h1>
-            <div className="h-[1px] md:h-[2px] w-24 md:w-32 bg-gradient-to-r from-transparent via-gold/50 to-transparent mx-auto mb-6 md:mb-8"></div>
-            <p className="text-gray-400 text-[9px] md:text-xs uppercase tracking-[0.4em] md:tracking-[0.6em] mb-8 md:mb-10 max-w-xs md:max-w-md mx-auto leading-loose italic px-4">
+            <div className="h-[2px] w-20 md:w-36 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-2 md:mb-3"></div>
+            <p className="text-gray-300 text-[8px] md:text-xs uppercase tracking-[0.4em] md:tracking-[0.8em] mb-3 md:mb-5 max-w-[90%] md:max-w-2xl mx-auto leading-[1.6] italic font-light drop-shadow-sm">
               {t.hero.tagline}
             </p>
-            <a href="#collection" className="px-10 md:px-12 py-3 md:py-4 bg-white text-black rounded-full text-[9px] md:text-[10px] uppercase tracking-widest font-black hover:bg-gold hover:text-white transition-all duration-500 shadow-2xl hover:shadow-gold/40">
-              {t.hero.explore}
-            </a>
           </div>
 
           {/* Balanced 3-Card Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-8 items-start w-full mt-6 md:mt-4 max-w-md md:max-w-none">
+          <div className="grid grid-cols-3 gap-4 md:gap-6 lg:gap-8 items-start w-full max-w-[1200px] mx-auto pb-4">
 
             {/* Left Card: Ear Piercing */}
-            <a href="#piercing" className="group glass rounded-[2.5rem] md:rounded-[3rem] overflow-hidden flex flex-col items-center justify-center relative hover:border-gold/30 transition-all duration-700 aspect-square w-full shadow-2xl">
-              <img
+            <a href="#piercing" className="group glass rounded-[1.5rem] md:rounded-[2rem] overflow-hidden flex flex-col items-center justify-center relative hover:border-gold/50 transition-all duration-700 aspect-square w-full shadow-2xl">
+              <Image
                 src="/images/ear-piercing.png"
                 alt={t.services.piercing.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 group-hover:scale-110 transition-all duration-1000"
+                fill
+                sizes="(min-width: 768px) 33vw, 33vw"
+                className="object-cover opacity-40 group-hover:opacity-75 group-hover:scale-110 transition-all duration-1000 brightness-110 contrast-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/95"></div>
-              <div className="relative z-10 p-8 md:p-10 text-center transition-transform duration-700 group-hover:scale-105">
-                <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.6em] text-gold font-bold mb-4 md:mb-6 block">{t.services.piercing.subtitle}</span>
-                <h3 className="text-xl md:text-3xl font-serif mb-4 md:mb-6 leading-tight whitespace-pre-line">{t.services.piercing.title.replace(' ', '\n')}</h3>
-                <div className="h-[1px] w-10 md:w-12 bg-gold/30 mx-auto mb-4 md:mb-6 transition-all duration-700 group-hover:w-24"></div>
-                <p className="text-gray-400 text-[11px] md:text-sm opacity-0 md:group-hover:opacity-100 transition-all duration-700 max-w-xs mx-auto leading-relaxed h-0 md:group-hover:h-auto overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/98"></div>
+              <div className="relative z-10 p-2 md:p-6 text-center transition-transform duration-700 group-hover:scale-105">
+                <span className="hidden md:block text-[8px] md:text-[9px] uppercase tracking-[0.4em] md:tracking-[0.6em] text-gold font-bold mb-2 md:mb-3">{t.services.piercing.subtitle}</span>
+                <h3 className="text-xs md:text-2xl font-serif mb-1 md:mb-3 leading-tight whitespace-pre-line">{t.services.piercing.title.replace(' ', '\n')}</h3>
+                <div className="h-[1px] w-4 md:w-12 bg-gold/40 mx-auto mb-1 md:mb-3 transition-all duration-700 group-hover:w-24"></div>
+                <p className="hidden md:group-hover:block text-gray-400 text-[9px] md:text-xs transition-all duration-700 max-w-[200px] mx-auto leading-relaxed">
                   {t.services.piercing.desc}
                 </p>
               </div>
             </a>
 
             {/* Middle Card: XRF Testing Services */}
-            <a href="#xrf" className="group glass rounded-[2.5rem] md:rounded-[3rem] overflow-hidden flex flex-col items-center justify-center relative border-gold/20 border hover:border-gold/50 transition-all duration-700 aspect-square w-full shadow-2xl">
-              <img
+            <a href="#xrf" className="group glass rounded-[1.5rem] md:rounded-[2rem] overflow-hidden flex flex-col items-center justify-center relative border-gold/40 border hover:border-gold/70 transition-all duration-700 aspect-square w-full shadow-2xl scale-105 z-20">
+              <Image
                 src="/images/xrf-testing.png"
                 alt={t.services.xrf.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-1000"
+                fill
+                sizes="(min-width: 768px) 33vw, 33vw"
+                className="object-cover opacity-50 group-hover:opacity-85 group-hover:scale-110 transition-all duration-1000 brightness-125 contrast-125"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-gold/10 via-black/60 to-black/95"></div>
-              <div className="relative z-10 p-8 md:p-10 text-center transition-transform duration-700 group-hover:scale-105">
-                <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.6em] text-gold font-black mb-4 md:mb-6 block">{t.services.xrf.subtitle}</span>
-                <h3 className="text-xl md:text-3xl font-serif mb-4 md:mb-6 leading-tight whitespace-pre-line">{t.services.xrf.title.replace(' ', '\n')}</h3>
-                <div className="h-[1px] w-10 md:w-12 bg-gold/50 mx-auto mb-4 md:mb-6 transition-all duration-700 group-hover:w-24"></div>
-                <p className="text-gray-400 text-[11px] md:text-sm opacity-0 md:group-hover:opacity-100 transition-all duration-700 max-w-xs mx-auto leading-relaxed h-0 md:group-hover:h-auto overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-gold/10 via-black/50 to-black/98"></div>
+              <div className="relative z-10 p-2 md:p-6 text-center transition-transform duration-700 group-hover:scale-105">
+                <span className="hidden md:block text-[8px] md:text-[9px] uppercase tracking-[0.4em] md:tracking-[0.6em] text-gold font-black mb-2 md:mb-3">{t.services.xrf.subtitle}</span>
+                <h3 className="text-[13px] md:text-3xl font-serif mb-1 md:mb-3 leading-tight whitespace-pre-line font-black drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]">{t.services.xrf.title.replace(' ', '\n')}</h3>
+                <div className="h-[1px] w-4 md:w-12 bg-gold/70 mx-auto mb-1 md:mb-3 transition-all duration-700 group-hover:w-24"></div>
+                <p className="hidden md:group-hover:block text-gray-400 text-[9px] md:text-xs transition-all duration-700 max-w-[200px] mx-auto leading-relaxed">
                   {t.services.xrf.desc}
                 </p>
               </div>
             </a>
 
             {/* Right Card: Laser Engraving */}
-            <a href="#engraving" className="group glass rounded-[2.5rem] md:rounded-[3rem] overflow-hidden flex flex-col items-center justify-center relative hover:border-silver/30 transition-all duration-700 aspect-square w-full shadow-2xl">
-              <img
+            <a href="#engraving" className="group glass rounded-[1.5rem] md:rounded-[2rem] overflow-hidden flex flex-col items-center justify-center relative hover:border-silver/50 transition-all duration-700 aspect-square w-full shadow-2xl">
+              <Image
                 src="/images/laser-engraving.png"
                 alt={t.services.engraving.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 group-hover:scale-110 transition-all duration-1000"
+                fill
+                sizes="(min-width: 768px) 33vw, 33vw"
+                className="object-cover opacity-40 group-hover:opacity-75 group-hover:scale-110 transition-all duration-1000 brightness-110 contrast-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/95"></div>
-              <div className="relative z-10 p-8 md:p-10 text-center transition-transform duration-700 group-hover:scale-105">
-                <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.6em] text-silver font-bold mb-4 md:mb-6 block">{t.services.engraving.subtitle}</span>
-                <h3 className="text-xl md:text-3xl font-serif mb-4 md:mb-6 leading-tight whitespace-pre-line">{t.services.engraving.title.replace(' ', '\n')}</h3>
-                <div className="h-[1px] w-10 md:w-12 bg-silver/30 mx-auto mb-4 md:mb-6 transition-all duration-700 group-hover:w-24"></div>
-                <p className="text-gray-400 text-[11px] md:text-sm opacity-0 md:group-hover:opacity-100 transition-all duration-700 max-w-xs mx-auto leading-relaxed h-0 md:group-hover:h-auto overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/98"></div>
+              <div className="relative z-10 p-2 md:p-6 text-center transition-transform duration-700 group-hover:scale-105">
+                <span className="hidden md:block text-[8px] md:text-[9px] uppercase tracking-[0.4em] md:tracking-[0.6em] text-silver font-bold mb-2 md:mb-3">{t.services.engraving.subtitle}</span>
+                <h3 className="text-xs md:text-2xl font-serif mb-1 md:mb-3 leading-tight whitespace-pre-line">{t.services.engraving.title.replace(' ', '\n')}</h3>
+                <div className="h-[1px] w-4 md:w-12 bg-silver/40 mx-auto mb-1 md:mb-3 transition-all duration-700 group-hover:w-24"></div>
+                <p className="hidden md:group-hover:block text-gray-400 text-[9px] md:text-xs transition-all duration-700 max-w-[200px] mx-auto leading-relaxed">
                   {t.services.engraving.desc}
                 </p>
               </div>

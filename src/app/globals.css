@@ -27,22 +27,42 @@ body {
 }
 
 .glass {
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.15);
 }
 
 .silver-text {
-  background: linear-gradient(135deg, #c0c0c0 0%, #e5e4e2 50%, #b0b0b0 100%);
+  background: linear-gradient(135deg, #e0e0e0 0%, #ffffff 50%, #b0b0b0 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
 }
 
 .gold-text {
-  background: linear-gradient(135deg, #d4af37 0%, #f9d71c 50%, #aa8803 100%);
+  background: linear-gradient(135deg, #d4af37 0%, #fff2ac 30%, #f9d71c 50%, #d4af37 70%, #aa8803 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
 }
 
 /* Language Specific Fonts & Styling */
