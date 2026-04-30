@@ -1,15 +1,33 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 import { useLanguage } from "@/context/LanguageContext";
 import { Language } from "@/lib/translations";
+import { createClient } from "@/lib/supabase/client";
+import { signOut } from "@/app/auth/actions";
 
 export default function Navbar() {
     const { language, setLanguage, t } = useLanguage();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLangOpen, setIsLangOpen] = useState(false);
+    const [user, setUser] = useState<any>(null);
+    const supabase = createClient();
+
+    useEffect(() => {
+        const getUser = async () => {
+            const { data } = await supabase.auth.getUser();
+            setUser(data.user);
+        };
+        getUser();
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null);
+        });
+
+        return () => subscription.unsubscribe();
+    }, []);
 
     const languages: { code: Language, label: string }[] = [
         { code: 'en', label: 'English' },
@@ -61,7 +79,24 @@ export default function Navbar() {
                 </Link>
             </div>
 
-            <div className="flex items-center space-x-2 md:space-x-6">
+            <div className="flex items-center space-x-2 md:space-x-4">
+                {/* Auth Button */}
+                {user ? (
+                    <button
+                        onClick={() => signOut()}
+                        className="text-[10px] md:text-[11px] uppercase tracking-widest text-white/70 hover:text-white transition-colors font-bold px-3 py-2"
+                    >
+                        Logout
+                    </button>
+                ) : (
+                    <Link
+                        href="/login"
+                        className="text-[10px] md:text-[11px] uppercase tracking-widest text-amber-200 hover:text-gold transition-colors font-bold px-3 py-2"
+                    >
+                        Login
+                    </Link>
+                )}
+
                 {/* Language Dropdown */}
                 <div className="relative">
                     <button
