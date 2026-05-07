@@ -11,7 +11,7 @@ const middleware = withAuth({
             }
 
             // Protect customer routes
-            if (pathname.startsWith('/dashboard') || pathname.startsWith('/book-piercing') || pathname.startsWith('/engraving-request')) {
+            if (pathname.startsWith('/dashboard')) {
                 return !!token
             }
 
@@ -26,5 +26,5 @@ export function proxy(req: any, event: any) {
 }
 
 export const config = {
-    matcher: ['/admin/:path*', '/dashboard/:path*', '/book-piercing/:path*', '/engraving-request/:path*']
+    matcher: ['/admin/:path*', '/dashboard/:path*']
 }
