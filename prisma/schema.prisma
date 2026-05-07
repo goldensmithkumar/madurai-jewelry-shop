@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id               String            @id @default(uuid())
+  email            String?           @unique
+  phone            String?           @unique
+  passwordHash     String            @map("password_hash")
+  createdAt        DateTime          @default(now()) @map("created_at")
+  profile          Profile?
+  piercingBookings PiercingBooking[]
+  meltingBookings  MeltingBooking[]
+  engravingOrders  EngravingOrder[]
+
+  @@map("users")
+}
+
+model Profile {
+  id        String   @id @default(uuid())
+  fullName  String?  @map("full_name")
+  role      String   @default("customer")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [id], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+model PiercingBooking {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId      String   @map("customer_id")
+  customerName String?  @map("customer_name")
+  cellphone   String?  @map("cellphone")
+  address     String?  @map("address")
+  bookingDate String   @map("booking_date")
+  timeSlot    String   @map("time_slot")
+  status      String   @default("pending")
+  createdAt   DateTime @default(now()) @map("created_at")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("piercing_bookings")
+}
+
+model EngravingOrder {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId        String   @map("customer_id")
+  customerName   String?  @map("customer_name")
+  cellphone     String?  @map("cellphone")
+  itemDetails   String   @map("item_details")
+  engravingText String?  @map("engraving_text")
+  imageUrl      String?  @map("image_url")
+  status        String   @default("pending")
+  createdAt     DateTime @default(now()) @map("created_at")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("engraving_orders")
+}
+
+model Product {
+  id                Int      @id @default(autoincrement())
+  material          String   
+  category          String   
+  name              String
+  weightGrams       String   @map("weight_grams")
+  imageUrl          String   @map("image_url")
+  secondaryImageUrl String?  @map("secondary_image_url")
+  bucket            String   @default("shop_images")
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  @@map("products")
+}
+
+model MeltingBooking {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId      String   @map("customer_id")
+  customerName String?  @map("customer_name")
+  cellphone   String?  @map("cellphone")
+  address     String?  @map("address")
+  bookingDate String   @map("booking_date")
+  timeSlot    String   @map("time_slot")
+  status      String   @default("pending")
+  createdAt   DateTime @default(now()) @map("created_at")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("melting_bookings")
+}

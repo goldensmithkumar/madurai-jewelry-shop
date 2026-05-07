@@ -1,115 +1,71 @@
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
-import Link from 'next/link'
+"use client";
 
-export default async function DashboardPage() {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
+import { useSession, signOut } from "next-auth/react";
+import { useLanguage } from "@/context/LanguageContext";
+import Link from "next/link";
+import Logo from "@/components/Logo";
 
-    if (!user) {
-        redirect('/login')
-    }
-
-    // Fetch user's bookings
-    const { data: bookings } = await supabase
-        .from('piercing_bookings')
-        .select('*')
-        .eq('customer_id', user.id)
-        .order('created_at', { ascending: false })
-
-    // Fetch user's engraving orders
-    const { data: engravings } = await supabase
-        .from('engraving_orders')
-        .select('*')
-        .eq('customer_id', user.id)
-        .order('created_at', { ascending: false })
+export default function DashboardPage() {
+    const { data: session } = useSession();
+    const { t } = useLanguage();
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] pt-28 pb-12 px-4 md:px-8">
-            <div className="max-w-6xl mx-auto">
-                <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
-                    <div>
-                        <h1 className="text-4xl font-serif gold-text mb-2">My Account</h1>
-                        <p className="text-gray-400">Welcome back, {user.user_metadata.full_name || user.email}</p>
-                    </div>
-                    <div className="flex gap-4">
-                        <Link
-                            href="/book-piercing"
-                            className="px-6 py-3 bg-gold/20 border border-gold/30 text-gold rounded-xl hover:bg-gold/30 transition-all font-bold text-sm"
-                        >
-                            Book Ear Piercing
-                        </Link>
-                        <Link
-                            href="/engraving-request"
-                            className="px-6 py-3 bg-white/10 border border-white/20 text-white rounded-xl hover:bg-white/20 transition-all font-bold text-sm"
-                        >
-                            Request Engraving
-                        </Link>
-                    </div>
-                </header>
+        <div className="min-h-screen bg-[#0a0a0a] pt-32 pb-12 px-6">
+            <div className="max-w-4xl mx-auto">
+                {/* Header Card */}
+                <div className="glass p-8 md:p-12 rounded-[2.5rem] border border-white/10 mb-10 overflow-hidden relative group">
+                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-gold/5 rounded-full blur-3xl group-hover:bg-gold/10 transition-all duration-700"></div>
 
-                <main className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Bookings Section */}
-                    <section className="glass p-8 rounded-3xl border border-white/10">
-                        <h2 className="text-xl font-bold text-white mb-6 uppercase tracking-widest">My Appointments</h2>
-                        {bookings && bookings.length > 0 ? (
-                            <div className="space-y-4">
-                                {bookings.map((booking) => (
-                                    <div key={booking.id} className="p-4 rounded-xl bg-white/5 border border-white/10 flex justify-between items-center">
-                                        <div>
-                                            <p className="text-amber-200 font-bold">{booking.booking_date}</p>
-                                            <p className="text-xs text-gray-400">{booking.time_slot}</p>
-                                        </div>
-                                        <span className={`px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-tighter ${booking.status === 'pending' ? 'bg-amber-400/20 text-amber-400' :
-                                                booking.status === 'confirmed' ? 'bg-green-400/20 text-green-400' :
-                                                    'bg-gray-400/20 text-gray-400'
-                                            }`}>
-                                            {booking.status}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="text-center py-12 border-2 border-dashed border-white/5 rounded-2xl">
-                                <p className="text-gray-500 mb-4">No appointments found</p>
-                                <Link href="/book-piercing" className="text-gold hover:underline font-bold text-sm">
-                                    Schedule your first appointment
-                                </Link>
-                            </div>
-                        )}
-                    </section>
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+                        <div className="text-center md:text-left">
+                            <h1 className="text-[10px] uppercase tracking-[0.4em] text-gold font-black mb-4">
+                                {t.dashboard.welcome}
+                            </h1>
+                            <h2 className="text-4xl md:text-5xl font-serif mb-2">{session?.user?.name || "Member"}</h2>
+                            <p className="text-gray-500 font-light text-lg">{session?.user?.email}</p>
+                        </div>
 
-                    {/* Engraving Orders Section */}
-                    <section className="glass p-8 rounded-3xl border border-white/10">
-                        <h2 className="text-xl font-bold text-white mb-6 uppercase tracking-widest">My Engraving Requests</h2>
-                        {engravings && engravings.length > 0 ? (
-                            <div className="space-y-4">
-                                {engravings.map((order) => (
-                                    <div key={order.id} className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center gap-4">
-                                        {order.image_url ? (
-                                            <img src={order.image_url} alt="Reference" className="w-12 h-12 rounded-lg object-cover border border-white/10" />
-                                        ) : (
-                                            <div className="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-xs text-gray-500">No Img</div>
-                                        )}
-                                        <div className="flex-1">
-                                            <p className="text-white font-bold text-sm truncate">{order.item_details}</p>
-                                            <p className="text-amber-200/60 text-xs italic">&quot;{order.engraving_text}&quot;</p>
-                                        </div>
-                                        <span className="px-3 py-1 rounded-full text-[10px] uppercase font-bold text-gray-400 bg-white/5">{order.status}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="text-center py-12 border-2 border-dashed border-white/5 rounded-2xl">
-                                <p className="text-gray-500 mb-4">No engraving requests yet</p>
-                                <Link href="/engraving-request" className="text-gold hover:underline font-bold text-sm">
-                                    Start a new request
-                                </Link>
-                            </div>
-                        )}
-                    </section>
-                </main>
+                        <div className="flex flex-col gap-4">
+                            <button
+                                onClick={() => signOut()}
+                                className="px-10 py-4 bg-white/5 border border-white/10 rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all active:scale-95"
+                            >
+                                {t.dashboard.logout}
+                            </button>
+                            <Link
+                                href="/"
+                                className="text-center text-[9px] uppercase tracking-widest text-gray-600 hover:text-gold transition-colors"
+                            >
+                                {t.dashboard.back_to_shop}
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Content Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="glass p-8 rounded-[2.5rem] border border-white/10">
+                        <h3 className="text-xs uppercase tracking-widest text-gold/60 font-bold mb-8 flex items-center gap-3">
+                            <span className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-sm">📅</span>
+                            {t.dashboard.orders}
+                        </h3>
+
+                        <div className="text-center py-12 border border-dashed border-white/10 rounded-3xl bg-white/[0.02]">
+                            <p className="text-gray-500 text-sm">{t.dashboard.no_orders}</p>
+                            <Link href="/#piercing" className="mt-4 inline-block text-[10px] uppercase tracking-widest text-gold hover:underline">
+                                Book a Service Now
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div className="glass p-8 rounded-[2.5rem] border border-white/10 flex flex-col items-center justify-center text-center">
+                        <Logo className="h-12 w-auto mb-6 grayscale opacity-30" />
+                        <p className="text-gray-500 font-light text-sm italic max-w-[200px]">
+                            "Crafting legacy since generations. Thank you for being part of our story."
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-    )
+    );
 }

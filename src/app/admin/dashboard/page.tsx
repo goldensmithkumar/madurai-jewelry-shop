@@ -1,37 +1,27 @@
-import { createClient } from '@/lib/supabase/server'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import prisma from '@/lib/prisma'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
 export default async function AdminDashboardPage() {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
+    const session = await getServerSession(authOptions)
 
-    if (!user) {
-        redirect('/login')
-    }
-
-    // Check if user is admin
-    const { data: profile } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', user.id)
-        .single()
-
-    if (!profile || profile.role !== 'admin') {
+    if (!session || (session.user as any).role !== 'admin') {
         redirect('/')
     }
 
     // Fetch ALL bookings (admin can see all)
-    const { data: bookings } = await supabase
-        .from('piercing_bookings')
-        .select('*, profiles(full_name)')
-        .order('created_at', { ascending: false })
+    const bookings = await prisma.piercingBooking.findMany({
+        include: { user: { include: { profile: true } } },
+        orderBy: { createdAt: 'desc' }
+    })
 
     // Fetch ALL engraving orders
-    const { data: engravings } = await supabase
-        .from('engraving_orders')
-        .select('*, profiles(full_name)')
-        .order('created_at', { ascending: false })
+    const engravings = await prisma.engravingOrder.findMany({
+        include: { user: { include: { profile: true } } },
+        orderBy: { createdAt: 'desc' }
+    })
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] pt-28 pb-12 px-4 md:px-8">
@@ -66,13 +56,13 @@ export default async function AdminDashboardPage() {
                                 <tbody>
                                     {bookings.map((booking) => (
                                         <tr key={booking.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                            <td className="py-4 pr-4 text-white font-bold">{(booking.profiles as any)?.full_name || 'Unknown'}</td>
-                                            <td className="py-4 pr-4 text-gray-300">{booking.booking_date}</td>
-                                            <td className="py-4 pr-4 text-gray-400">{booking.time_slot}</td>
+                                            <td className="py-4 pr-4 text-white font-bold">{booking.user?.profile?.fullName || booking.user?.email || 'Unknown'}</td>
+                                            <td className="py-4 pr-4 text-gray-300">{booking.bookingDate}</td>
+                                            <td className="py-4 pr-4 text-gray-400">{booking.timeSlot}</td>
                                             <td className="py-4">
                                                 <span className={`px-3 py-1 rounded-full text-[10px] uppercase font-bold ${booking.status === 'pending' ? 'bg-amber-400/20 text-amber-400' :
-                                                        booking.status === 'confirmed' ? 'bg-green-400/20 text-green-400' :
-                                                            'bg-gray-400/20 text-gray-400'
+                                                    booking.status === 'confirmed' ? 'bg-green-400/20 text-green-400' :
+                                                        'bg-gray-400/20 text-gray-400'
                                                     }`}>
                                                     {booking.status}
                                                 </span>
@@ -94,13 +84,13 @@ export default async function AdminDashboardPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {engravings.map((order) => (
                                 <div key={order.id} className="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-gold/30 transition-all">
-                                    {order.image_url && (
-                                        <img src={order.image_url} alt="Engraving ref" className="w-full h-40 object-cover rounded-xl mb-4 border border-white/10" />
+                                    {order.imageUrl && (
+                                        <img src={order.imageUrl} alt="Engraving ref" className="w-full h-40 object-cover rounded-xl mb-4 border border-white/10" />
                                     )}
-                                    <p className="text-white font-bold mb-1">{order.item_details}</p>
-                                    <p className="text-amber-200/60 text-sm italic mb-2">&quot;{order.engraving_text}&quot;</p>
+                                    <p className="text-white font-bold mb-1">{order.itemDetails}</p>
+                                    <p className="text-amber-200/60 text-sm italic mb-2">&quot;{order.engravingText}&quot;</p>
                                     <div className="flex justify-between items-center">
-                                        <p className="text-gray-500 text-xs">By: {(order.profiles as any)?.full_name || 'Unknown'}</p>
+                                        <p className="text-gray-500 text-xs">By: {order.user?.profile?.fullName || order.user?.email || 'Unknown'}</p>
                                         <span className="px-3 py-1 rounded-full text-[10px] uppercase font-bold text-gray-400 bg-white/5">{order.status}</span>
                                     </div>
                                 </div>

@@ -1,30 +1,37 @@
 'use server'
 
-import { createClient } from '@/lib/supabase/server'
+import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
 
 export async function createBooking(formData: FormData) {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
+    const session = await getServerSession(authOptions)
 
-    if (!user) {
+    if (!session || !session.user || !(session.user as any).id) {
         throw new Error('Not authenticated')
     }
 
-    const booking_date = formData.get('date') as string
-    const time_slot = formData.get('time') as string
+    const bookingDate = formData.get('date') as string
+    const timeSlot = formData.get('time') as string
+    const customerName = formData.get('customerName') as string
+    const cellphone = formData.get('cellphone') as string
+    const address = formData.get('address') as string
 
-    const { error } = await supabase
-        .from('piercing_bookings')
-        .insert({
-            customer_id: user.id,
-            booking_date,
-            time_slot,
-            status: 'pending'
+    try {
+        await prisma.piercingBooking.create({
+            data: {
+                userId: (session.user as any).id,
+                bookingDate,
+                timeSlot,
+                customerName,
+                cellphone,
+                address,
+                status: 'pending'
+            }
         })
-
-    if (error) {
+    } catch (error: any) {
         redirect('/book-piercing?error=' + encodeURIComponent(error.message))
     }
 

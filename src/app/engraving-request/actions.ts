@@ -1,32 +1,33 @@
 'use server'
 
-import { createClient } from '@/lib/supabase/server'
+import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
 
 export async function createEngravingOrder(data: {
     item_details: string
     engraving_text: string
     image_url: string
 }) {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
+    const session = await getServerSession(authOptions)
 
-    if (!user) {
+    if (!session || !session.user || !(session.user as any).id) {
         throw new Error('Not authenticated')
     }
 
-    const { error } = await supabase
-        .from('engraving_orders')
-        .insert({
-            customer_id: user.id,
-            item_details: data.item_details,
-            engraving_text: data.engraving_text,
-            image_url: data.image_url,
-            status: 'pending'
+    try {
+        await prisma.engravingOrder.create({
+            data: {
+                userId: (session.user as any).id,
+                itemDetails: data.item_details,
+                engravingText: data.engraving_text,
+                imageUrl: data.image_url,
+                status: 'pending'
+            }
         })
-
-    if (error) {
+    } catch (error: any) {
         throw new Error(error.message)
     }
 

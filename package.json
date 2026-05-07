@@ -3,14 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cap:sync": "npx cap sync",
+    "cap:open-android": "npx cap open android",
+    "mobile:build": "npm run build && npx cap sync"
   },
   "dependencies": {
-    "@supabase/ssr": "^0.10.2",
-    "@supabase/supabase-js": "^2.105.1",
+    "@capacitor/android": "^8.3.1",
+    "@capacitor/cli": "^8.3.1",
+    "@capacitor/core": "^8.3.1",
+    "@prisma/client": "^6.19.3",
+    "@supabase/supabase-js": "^2.105.3",
+    "@types/bcrypt": "^6.0.0",
     "browser-image-compression": "^2.0.2",
     "next": "16.2.4",
     "react": "19.2.4",
@@ -21,8 +29,12 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "next-auth": "^4.24.14",
+    "prisma": "^6.19.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

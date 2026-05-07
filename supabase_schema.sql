@@ -19,6 +19,16 @@ CREATE TABLE public.piercing_bookings (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
+-- 3.5 Create the melting_bookings table
+CREATE TABLE public.melting_bookings (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  customer_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
+  booking_date DATE NOT NULL,
+  time_slot TEXT NOT NULL,
+  status TEXT DEFAULT 'pending' NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
 -- 4. Create the engraving_orders table
 CREATE TABLE public.engraving_orders (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -42,6 +52,7 @@ CREATE TABLE public.customer_uploads (
 -- 6. Enable Row Level Security (RLS) on all tables
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.piercing_bookings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.melting_bookings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.engraving_orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.customer_uploads ENABLE ROW LEVEL SECURITY;
 
@@ -64,6 +75,18 @@ CREATE POLICY "Customers can create their own bookings" ON public.piercing_booki
   FOR INSERT WITH CHECK (auth.uid() = customer_id);
 
 CREATE POLICY "Admins can view all bookings" ON public.piercing_bookings
+  FOR ALL USING (
+    EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin')
+  );
+
+-- Melting Bookings: Customers can see/create their own, Admins can see all
+CREATE POLICY "Customers can view their own melting bookings" ON public.melting_bookings
+  FOR SELECT USING (auth.uid() = customer_id);
+
+CREATE POLICY "Customers can create their own melting bookings" ON public.melting_bookings
+  FOR INSERT WITH CHECK (auth.uid() = customer_id);
+
+CREATE POLICY "Admins can view all melting bookings" ON public.melting_bookings
   FOR ALL USING (
     EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin')
   );

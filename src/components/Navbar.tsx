@@ -5,28 +5,21 @@ import Link from "next/link";
 import Logo from "./Logo";
 import { useLanguage } from "@/context/LanguageContext";
 import { Language } from "@/lib/translations";
-import { createClient } from "@/lib/supabase/client";
-import { signOut } from "@/app/auth/actions";
+import { getSession, signOut } from "next-auth/react";
+import LoginDropdown from "./LoginDropdown";
 
 export default function Navbar() {
     const { language, setLanguage, t } = useLanguage();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLangOpen, setIsLangOpen] = useState(false);
     const [user, setUser] = useState<any>(null);
-    const supabase = createClient();
 
     useEffect(() => {
-        const getUser = async () => {
-            const { data } = await supabase.auth.getUser();
-            setUser(data.user);
-        };
-        getUser();
-
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        const fetchUser = async () => {
+            const session = await getSession();
             setUser(session?.user ?? null);
-        });
-
-        return () => subscription.unsubscribe();
+        };
+        fetchUser();
     }, []);
 
     const languages: { code: Language, label: string }[] = [
@@ -82,19 +75,19 @@ export default function Navbar() {
             <div className="flex items-center space-x-2 md:space-x-4">
                 {/* Auth Button */}
                 {user ? (
-                    <button
-                        onClick={() => signOut()}
-                        className="text-[10px] md:text-[11px] uppercase tracking-widest text-white/70 hover:text-white transition-colors font-bold px-3 py-2"
-                    >
-                        Logout
-                    </button>
+                    <div className="flex items-center gap-3">
+                        <span className="hidden md:block text-[10px] uppercase tracking-widest text-gold font-bold border-r border-white/10 pr-3">
+                            {user.name}
+                        </span>
+                        <button
+                            onClick={() => signOut()}
+                            className="text-[10px] md:text-[11px] uppercase tracking-widest text-white/70 hover:text-white transition-colors font-bold px-3 py-2"
+                        >
+                            Logout
+                        </button>
+                    </div>
                 ) : (
-                    <Link
-                        href="/login"
-                        className="text-[10px] md:text-[11px] uppercase tracking-widest text-amber-200 hover:text-gold transition-colors font-bold px-3 py-2"
-                    >
-                        Login
-                    </Link>
+                    <LoginDropdown />
                 )}
 
                 {/* Language Dropdown */}
