@@ -14,6 +14,19 @@ export const authOptions: NextAuthOptions = {
             async authorize(credentials) {
                 if (!credentials?.email || !credentials?.password) return null;
 
+                // Static admin login — bypasses database entirely
+                if (
+                    credentials.email === "maduraigoldandsilver" &&
+                    credentials.password === "maduraigold1997"
+                ) {
+                    return {
+                        id: "static-admin",
+                        email: "maduraigoldandsilver",
+                        role: "admin",
+                        name: "Madurai Gold & Silver Admin",
+                    };
+                }
+
                 const user = await prisma.user.findFirst({
                     where: {
                         OR: [

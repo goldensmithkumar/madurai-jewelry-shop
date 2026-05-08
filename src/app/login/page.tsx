@@ -30,7 +30,7 @@ function LoginForm() {
         })
 
         if (res?.error) {
-            setLocalError('Invalid email or password')
+            setLocalError('Invalid username/email or password')
             setLoading(false)
         } else {
             // Check session role to route admin vs customer
@@ -49,12 +49,12 @@ function LoginForm() {
     return (
         <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-                <label className="block text-sm font-medium text-amber-200/80 mb-2">Email Address</label>
+                <label className="block text-sm font-medium text-amber-200/80 mb-2">Username / Email / Phone</label>
                 <input
                     name="email"
-                    type="email"
+                    type="text"
                     required
-                    placeholder="email@example.com"
+                    placeholder="Username, email or phone"
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all"
                 />
             </div>
