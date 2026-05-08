@@ -6,7 +6,7 @@ import Logo from "./Logo";
 import { useLanguage } from "@/context/LanguageContext";
 import { Language } from "@/lib/translations";
 import { getSession, signOut } from "next-auth/react";
-import LoginDropdown from "./LoginDropdown";
+
 
 export default function Navbar() {
     const { language, setLanguage, t } = useLanguage();
@@ -87,7 +87,13 @@ export default function Navbar() {
                         </button>
                     </div>
                 ) : (
-                    <LoginDropdown />
+                    <Link
+                        href="/login"
+                        className="flex items-center gap-2 bg-gold/10 hover:bg-gold/20 border border-gold/30 px-4 py-2 rounded-xl transition-all group"
+                    >
+                        <span className="text-lg">👤</span>
+                        <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-gold font-black">Login</span>
+                    </Link>
                 )}
 
                 {/* Language Dropdown */}
@@ -145,6 +151,9 @@ export default function Navbar() {
                         <Link href="/collection" onClick={() => setIsMenuOpen(false)} className="hover:text-gold transition-colors">{t.nav.collection}</Link>
                         <Link href="#piercing" onClick={() => setIsMenuOpen(false)} className="hover:text-gold transition-colors">{t.nav.piercing}</Link>
                         <Link href="#engraving" onClick={() => setIsMenuOpen(false)} className="hover:text-gold transition-colors">{t.nav.engraving}</Link>
+                        {!user && (
+                            <Link href="/login" onClick={() => setIsMenuOpen(false)} className="text-gold hover:text-white transition-colors">Login</Link>
+                        )}
                     </div>
                 </div>
             </div>
