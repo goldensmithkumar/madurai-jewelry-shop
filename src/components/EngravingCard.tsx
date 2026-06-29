@@ -85,13 +85,13 @@ export default function EngravingCard({ name, category, beforeImage, afterImage 
                 ref={containerRef}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="h-64 bg-white/5 rounded-2xl mb-6 overflow-hidden flex items-center justify-center relative flex-shrink-0 cursor-ew-resize group/slider"
+                className="aspect-[4/5] bg-black/20 rounded-2xl mb-6 overflow-hidden flex items-center justify-center relative flex-shrink-0 cursor-ew-resize group/slider"
             >
                 {/* AFTER Image (Background) */}
                 <img
                     src={afterImage}
                     alt={`${name} Engraved`}
-                    className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[3000ms] ease-in-out ${!swept && sliderPos > 0 ? 'scale-110' : 'scale-100'}`}
+                    className={`absolute inset-0 w-full h-full object-contain transition-transform duration-[3000ms] ease-in-out ${!swept && sliderPos > 0 ? 'scale-110' : 'scale-100'}`}
                 />
 
                 {/* BEFORE Image (Clipped Over Top) */}
@@ -103,7 +103,7 @@ export default function EngravingCard({ name, category, beforeImage, afterImage 
                         <img
                             src={beforeImage}
                             alt={`${name} Blank`}
-                            className="absolute inset-0 w-full h-full object-cover scale-100"
+                            className="absolute inset-0 w-full h-full object-contain scale-100"
                         />
                     </div>
                 )}
