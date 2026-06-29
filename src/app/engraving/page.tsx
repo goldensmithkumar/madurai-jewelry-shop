@@ -12,22 +12,12 @@ function EngravingContent() {
     const beforeImage = searchParams.get("beforeImage") || "";
     const afterImage = searchParams.get("afterImage") || "";
 
-    const [sliderPos, setSliderPos] = useState(100); 
+    const [sliderPos, setSliderPos] = useState(0); 
     const containerRef = useRef<HTMLDivElement>(null);
     const [isHovering, setIsHovering] = useState(false);
-    const [swept, setSwept] = useState(false);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setSliderPos(0);
-            const timer2 = setTimeout(() => setSwept(true), 1000);
-            return () => clearTimeout(timer2);
-        }, 800);
-        return () => clearTimeout(timer);
-    }, []);
 
     function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-        if (!containerRef.current || !swept) return;
+        if (!containerRef.current) return;
         setIsHovering(true);
         const rect = containerRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -59,7 +49,7 @@ function EngravingContent() {
                         <img 
                             src={afterImage} 
                             alt={name} 
-                            className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[3000ms] ease-in-out ${!swept && sliderPos > 0 ? 'scale-110' : 'scale-100'}`}
+                            className="absolute inset-0 w-full h-full object-cover scale-100"
                         />
                     ) : (
                         <Logo className="w-32 h-auto opacity-20 grayscale" />
@@ -67,7 +57,7 @@ function EngravingContent() {
 
                     {beforeImage && (
                         <div
-                            className={`absolute inset-0 w-full h-full overflow-hidden ${!swept ? 'transition-all duration-1000 ease-in-out' : ''}`}
+                            className="absolute inset-0 w-full h-full overflow-hidden"
                             style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
                         >
                             <img
@@ -81,8 +71,7 @@ function EngravingContent() {
                     {/* Laser Bar & Slider Handle */}
                     {beforeImage && (
                         <div
-                            className={`absolute top-0 bottom-0 w-[2px] bg-gold/90 shadow-[0_0_10px_#d4af37,0_0_20px_#fff] z-30 
-                                ${!swept ? 'transition-all duration-1000 ease-in-out' : ''}`}
+                            className="absolute top-0 bottom-0 w-[2px] bg-gold/90 shadow-[0_0_10px_#d4af37,0_0_20px_#fff] z-30"
                             style={{ left: `calc(${sliderPos}% - 1px)` }}
                         >
                             <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-black/60 backdrop-blur-md border border-gold/50 rounded-full flex items-center justify-center transition-opacity duration-300 ${isHovering ? 'opacity-100 scale-110' : 'opacity-0 scale-90'}`}>

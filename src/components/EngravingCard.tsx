@@ -11,10 +11,9 @@ interface EngravingCardProps {
 }
 
 export default function EngravingCard({ name, category, beforeImage, afterImage }: EngravingCardProps) {
-    const [sliderPos, setSliderPos] = useState(100); // Starts showing BEFORE
+    const [sliderPos, setSliderPos] = useState(0); // Starts showing AFTER
     const containerRef = useRef<HTMLDivElement>(null);
     const [isHovering, setIsHovering] = useState(false);
-    const [swept, setSwept] = useState(false);
     const [liked, setLiked] = useState(false);
     const [likesCount, setLikesCount] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
@@ -34,18 +33,8 @@ export default function EngravingCard({ name, category, beforeImage, afterImage 
         }
     }, [name, category]);
 
-    // Initial sweeping animation
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setSliderPos(0);
-            const timer2 = setTimeout(() => setSwept(true), 1000);
-            return () => clearTimeout(timer2);
-        }, 800);
-        return () => clearTimeout(timer);
-    }, []);
-
     function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-        if (!containerRef.current || !swept) return;
+        if (!containerRef.current) return;
         setIsHovering(true);
         const rect = containerRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -91,13 +80,13 @@ export default function EngravingCard({ name, category, beforeImage, afterImage 
                 <img
                     src={afterImage}
                     alt={`${name} Engraved`}
-                    className={`absolute inset-0 w-full h-full object-contain transition-transform duration-[3000ms] ease-in-out ${!swept && sliderPos > 0 ? 'scale-110' : 'scale-100'}`}
+                    className="absolute inset-0 w-full h-full object-contain scale-100"
                 />
 
                 {/* BEFORE Image (Clipped Over Top) */}
                 {beforeImage && (
                     <div
-                        className={`absolute inset-0 w-full h-full overflow-hidden ${!swept ? 'transition-all duration-1000 ease-in-out' : ''}`}
+                        className="absolute inset-0 w-full h-full overflow-hidden"
                         style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
                     >
                         <img
@@ -111,8 +100,7 @@ export default function EngravingCard({ name, category, beforeImage, afterImage 
                 {/* Laser Bar & Slider Handle */}
                 {beforeImage && (
                     <div
-                        className={`absolute top-0 bottom-0 w-[2px] bg-gold/90 shadow-[0_0_10px_#d4af37,0_0_20px_#fff] z-10 
-                            ${!swept ? 'transition-all duration-1000 ease-in-out' : ''}`}
+                        className="absolute top-0 bottom-0 w-[2px] bg-gold/90 shadow-[0_0_10px_#d4af37,0_0_20px_#fff] z-10"
                         style={{ left: `calc(${sliderPos}% - 1px)` }}
                     >
                         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-black/60 backdrop-blur-md border border-gold/50 rounded-full flex items-center justify-center transition-opacity duration-300 ${isHovering ? 'opacity-100 scale-110' : 'opacity-0 scale-90'}`}>
