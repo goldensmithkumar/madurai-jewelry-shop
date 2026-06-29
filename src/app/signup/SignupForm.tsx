@@ -69,20 +69,6 @@ export default function SignupForm({ error: initialError }: { error?: string }) 
                         />
                     </div>
 
-                    {/* Email */}
-                    <div className="glass p-4 rounded-2xl border border-white/10 focus-within:border-gold/50 transition-all opacity-80 focus-within:opacity-100">
-                        <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-black text-gold mb-3">
-                            <span className="bg-white/10 p-1.5 rounded-lg">✉️</span>
-                            {t.email_address} ({t.optional})
-                        </label>
-                        <input
-                            name="email"
-                            type="email"
-                            placeholder="mail@example.com"
-                            className="w-full bg-transparent text-white placeholder-gray-600 focus:outline-none font-medium text-sm"
-                        />
-                    </div>
-
                     {/* Password */}
                     <div className="glass p-4 rounded-2xl border border-white/10 focus-within:border-gold/50 transition-all">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-black text-gold mb-3">
@@ -92,9 +78,10 @@ export default function SignupForm({ error: initialError }: { error?: string }) 
                         <input
                             name="password"
                             type="password"
+                            inputMode="text"
                             required
-                            placeholder="••••••••"
-                            className="w-full bg-transparent text-white placeholder-gray-600 focus:outline-none font-medium text-lg"
+                            placeholder="****"
+                            className="w-full bg-transparent text-white placeholder-gray-600 focus:outline-none font-medium text-lg tracking-widest"
                         />
                     </div>
                 </div>

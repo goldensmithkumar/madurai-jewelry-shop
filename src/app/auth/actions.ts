@@ -33,8 +33,8 @@ export async function signup(formData: FormData) {
 
         await prisma.user.create({
             data: {
-                email,
-                phone,
+                email: email ? email : null,
+                phone: phone ? phone : null,
                 passwordHash,
                 profile: {
                     create: {

@@ -49,24 +49,25 @@ function LoginForm() {
     return (
         <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-                <label className="block text-sm font-medium text-amber-200/80 mb-2">Username / Email / Phone</label>
+                <label className="block text-sm font-medium text-amber-200/80 mb-2">Phone Number</label>
                 <input
                     name="email"
                     type="text"
                     required
-                    placeholder="Username, email or phone"
+                    placeholder="Enter your phone number"
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all"
                 />
             </div>
 
             <div>
-                <label className="block text-sm font-medium text-amber-200/80 mb-2">Password</label>
+                <label className="block text-sm font-medium text-amber-200/80 mb-2">4-Digit PIN</label>
                 <input
                     name="password"
                     type="password"
+                    inputMode="text"
                     required
-                    placeholder="••••••••"
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all"
+                    placeholder="****"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all tracking-widest"
                 />
             </div>
 

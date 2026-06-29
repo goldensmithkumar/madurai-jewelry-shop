@@ -69,8 +69,8 @@ export default function Home() {
                 </span>
               </div>
             )}
-            <h1 className="text-xl md:text-4xl lg:text-5xl font-serif mb-1 md:mb-2 tracking-[0.2em] md:tracking-[0.4em] leading-tight mt-1">
-              <span className="gold-text whitespace-nowrap drop-shadow-[0_0_20px_rgba(212,175,55,0.5)]">{t.hero.title}</span>
+            <h1 className="text-2xl md:text-5xl lg:text-6xl font-serif mb-3 md:mb-5 tracking-widest leading-tight mt-2 flex flex-col items-center" style={{ color: '#d4af37', textShadow: '0 0 15px rgba(212,175,55,0.4)' }}>
+              <span className="whitespace-nowrap">Gold &amp; Silver</span>
             </h1>
             <div className="h-[2px] w-20 md:w-36 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-2 md:mb-3"></div>
             <p className="text-gray-300 text-[8px] md:text-xs uppercase tracking-[0.4em] md:tracking-[0.8em] mb-3 md:mb-5 max-w-[90%] md:max-w-2xl mx-auto leading-[1.6] italic font-light drop-shadow-sm">
