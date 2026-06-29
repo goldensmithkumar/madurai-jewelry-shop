@@ -222,15 +222,15 @@ export default function Home() {
 
       {/* Engraving Collection */}
       <section className="py-24 px-6 md:px-24 bg-white/[0.02]">
-        <div className="flex justify-between items-end mb-16">
+        <div className="flex justify-between items-end mb-16 border-b border-white/10 pb-6">
           <div>
             <h6 className="text-[10px] uppercase tracking-[0.3em] font-semibold mb-2 text-silver">Showcase</h6>
             <h2 className="text-4xl font-serif">Engraving Masterpieces</h2>
           </div>
           {engravingImages.length > 0 && (
-            <span className="text-[10px] uppercase tracking-widest text-silver/60">
-              Recent Work
-            </span>
+            <Link href="/collection" className="text-[10px] uppercase tracking-widest text-silver/60 hover:text-silver transition-colors font-bold border-b border-silver/20 hover:border-silver/50 pb-1">
+              View All Engravings →
+            </Link>
           )}
         </div>
 
