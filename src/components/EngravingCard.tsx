@@ -78,14 +78,14 @@ export default function EngravingCard({ name, category, beforeImage, afterImage 
     };
 
     return (
-        <div className="glass p-5 rounded-[2rem] hover-lift group relative overflow-hidden transition-all duration-500 hover:border-gold/30 border border-white/5 flex flex-col h-full shadow-lg">
+        <div className="glass p-3 rounded-2xl hover-lift group relative overflow-hidden transition-all duration-500 hover:border-gold/30 border border-white/5 flex flex-col h-full shadow-lg">
             
             {/* Interactive Slider Area (Matches ProductCard Image Area) */}
             <div 
                 ref={containerRef}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="aspect-[4/5] bg-black/20 rounded-2xl mb-6 overflow-hidden flex items-center justify-center relative flex-shrink-0 cursor-ew-resize group/slider"
+                className="aspect-[4/5] bg-black/20 rounded-xl mb-3 overflow-hidden flex items-center justify-center relative flex-shrink-0 cursor-ew-resize group/slider"
             >
                 {/* AFTER Image (Background) */}
                 <img
@@ -136,38 +136,38 @@ export default function EngravingCard({ name, category, beforeImage, afterImage 
 
             <div className="flex flex-col flex-1 relative z-10 px-1">
                 {/* Brand Title Area */}
-                <div className="flex items-center gap-3 mb-4 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
-                    <Logo className="h-5 w-auto brightness-150" />
-                    <div className="border-l border-white/10 pl-3">
-                        <p className="text-[8px] uppercase tracking-[0.2em] gold-text font-bold leading-none mb-[3px]">Madurai</p>
-                        <p className="text-[7px] uppercase tracking-widest text-silver/70 leading-none">Engraving</p>
+                <div className="flex items-center gap-2 mb-2 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                    <Logo className="h-4 w-auto brightness-150" />
+                    <div className="border-l border-white/10 pl-2">
+                        <p className="text-[7px] uppercase tracking-[0.2em] gold-text font-bold leading-none mb-[2px]">Madurai</p>
+                        <p className="text-[6px] uppercase tracking-widest text-silver/70 leading-none">Engraving</p>
                     </div>
                 </div>
 
                 {/* Product Detail Area */}
-                <div className="flex justify-between items-start mb-5">
+                <div className="flex justify-between items-start mb-3">
                     <div className="flex-1 pr-2">
-                        <h3 className="text-lg font-serif mb-1 leading-tight group-hover:text-silver transition-colors">{name}</h3>
-                        <p className="text-gray-500 text-[10px] uppercase tracking-[0.15em] font-light">{category}</p>
+                        <h3 className="text-sm font-serif mb-1 leading-tight group-hover:text-silver transition-colors line-clamp-1">{name}</h3>
+                        <p className="text-gray-500 text-[9px] uppercase tracking-[0.15em] font-light line-clamp-1">{category}</p>
                     </div>
-                    <span className="text-white/90 font-medium tracking-wide flex-shrink-0 py-1 px-3 bg-white/5 rounded-full border border-white/10 text-xs shadow-inner shadow-black/50">Custom</span>
+                    <span className="text-white/90 font-medium tracking-wide flex-shrink-0 py-0.5 px-2 bg-white/5 rounded-full border border-white/10 text-[10px] shadow-inner shadow-black/50">Custom</span>
                 </div>
 
                 {/* Action Bar */}
-                <div className="mt-auto pt-4 border-t border-white/10 flex gap-2">
+                <div className="mt-auto pt-3 border-t border-white/10 flex gap-2">
                     <button 
                         onClick={handleLike}
-                        className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border transition-all duration-300 font-bold ${liked ? 'bg-blue-600/20 border-blue-500/50 text-blue-400' : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'} ${isAnimating ? 'scale-95' : 'scale-100'}`}
+                        className={`flex-[0.8] flex items-center justify-center gap-1.5 py-2 rounded-lg border transition-all duration-300 font-bold ${liked ? 'bg-blue-600/20 border-blue-500/50 text-blue-400' : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'} ${isAnimating ? 'scale-95' : 'scale-100'}`}
                     >
-                        <svg className={`w-4 h-4 transition-transform duration-300 ${liked ? 'fill-blue-400 scale-110' : ''}`} viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill={liked ? "currentColor" : "none"}>
+                        <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${liked ? 'fill-blue-400 scale-110' : ''}`} viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill={liked ? "currentColor" : "none"}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.514" />
                         </svg>
-                        <span className="text-[11px] tracking-wide">{liked ? 'Liked' : 'Like'}</span>
+                        <span className="text-[10px] tracking-wide">{liked ? 'Liked' : 'Like'}</span>
                     </button>
                     
                     <Link 
                         href={`/engraving?name=${encodeURIComponent(name)}&category=${encodeURIComponent(category)}&beforeImage=${encodeURIComponent(beforeImage || '')}&afterImage=${encodeURIComponent(afterImage || '')}`}
-                        className="flex-[1.5] flex items-center justify-center py-3 rounded-xl border border-white/10 text-[10px] uppercase tracking-widest bg-black/20 hover:bg-silver/80 hover:text-black transition-all duration-500 hover:border-transparent font-bold hover:shadow-[0_0_15px_rgba(192,192,192,0.4)]"
+                        className="flex-[1.2] flex items-center justify-center py-2 rounded-lg border border-white/10 text-[9px] uppercase tracking-widest bg-black/20 hover:bg-silver/80 hover:text-black transition-all duration-500 hover:border-transparent font-bold hover:shadow-[0_0_15px_rgba(192,192,192,0.4)]"
                     >
                         View Details
                     </Link>
