@@ -86,9 +86,9 @@ export default function Home() {
               <img
                 src={heroImgPiercing}
                 alt={t.services.piercing.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-75 group-hover:scale-110 transition-all duration-1000 brightness-110 contrast-110"
+                className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 brightness-110 contrast-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/98"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
               <div className="relative z-10 p-2 md:p-6 text-center transition-transform duration-700 group-hover:scale-105">
                 <span className="hidden md:block text-[8px] md:text-[9px] uppercase tracking-[0.4em] md:tracking-[0.6em] text-gold font-bold mb-2 md:mb-3">{t.services.piercing.subtitle}</span>
                 <h3 className="text-xs md:text-2xl font-serif mb-1 md:mb-3 leading-tight whitespace-pre-line">{t.services.piercing.title.replace(' ', '\n')}</h3>
@@ -101,9 +101,9 @@ export default function Home() {
               <img
                 src={heroImgMelting}
                 alt={t.services.melting.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-85 group-hover:scale-110 transition-all duration-1000 brightness-125 contrast-125"
+                className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 brightness-125 contrast-125"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-gold/10 via-black/50 to-black/98"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-gold/10 via-black/30 to-black/80"></div>
               <div className="relative z-10 p-2 md:p-6 text-center transition-transform duration-700 group-hover:scale-105">
                 <span className="hidden md:block text-[8px] md:text-[9px] uppercase tracking-[0.4em] md:tracking-[0.6em] text-gold font-black mb-2 md:mb-3">{t.services.melting.subtitle}</span>
                 <h3 className="text-[13px] md:text-3xl font-serif mb-1 md:mb-3 leading-tight whitespace-pre-line font-black drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]">{t.services.melting.title.replace(' ', '\n')}</h3>
@@ -116,9 +116,9 @@ export default function Home() {
               <img
                 src={heroImgEngraving}
                 alt={t.services.engraving.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-75 group-hover:scale-110 transition-all duration-1000 brightness-110 contrast-110"
+                className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 brightness-110 contrast-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/98"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
               <div className="relative z-10 p-2 md:p-6 text-center transition-transform duration-700 group-hover:scale-105">
                 <span className="hidden md:block text-[8px] md:text-[9px] uppercase tracking-[0.4em] md:tracking-[0.6em] text-silver font-bold mb-2 md:mb-3">{t.services.engraving.subtitle}</span>
                 <h3 className="text-xs md:text-2xl font-serif mb-1 md:mb-3 leading-tight whitespace-pre-line">{t.services.engraving.title.replace(' ', '\n')}</h3>
