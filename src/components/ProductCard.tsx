@@ -8,7 +8,6 @@ export default function ProductCard({ name, category, price, image }: { name: st
     const [liked, setLiked] = useState(false);
     const [likesCount, setLikesCount] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
-    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
     useEffect(() => {
         // Generate a stable fake initial like count based on product name
@@ -52,8 +51,7 @@ export default function ProductCard({ name, category, price, image }: { name: st
                     <img
                         src={image}
                         alt={name}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 opacity-80 group-hover:opacity-100 cursor-pointer"
-                        onClick={() => setIsImageModalOpen(true)}
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 opacity-80 group-hover:opacity-100"
                     />
                 ) : (
                     <div className="text-gray-600 text-[10px] uppercase tracking-widest italic">{category}</div>
@@ -109,32 +107,6 @@ export default function ProductCard({ name, category, price, image }: { name: st
                 </div>
             </div>
         </div>
-            
-            {/* Full Screen Image Modal */}
-            {isImageModalOpen && image && (
-                <div 
-                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 cursor-zoom-out transition-opacity duration-300"
-                    onClick={() => setIsImageModalOpen(false)}
-                >
-                    <button 
-                        className="absolute top-6 right-6 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 rounded-full p-2 transition-all duration-300"
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setIsImageModalOpen(false);
-                        }}
-                    >
-                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                    <img
-                        src={image}
-                        alt={name}
-                        className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
-                        onClick={(e) => e.stopPropagation()}
-                    />
-                </div>
-            )}
         </>
     );
 }

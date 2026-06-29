@@ -67,16 +67,25 @@ function ProductContent() {
                 </p>
 
                 {/* Actions */}
-                <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                    <button className="flex-1 bg-gradient-to-r from-[#d4af37] to-yellow-600 text-black py-4 px-8 rounded-2xl font-bold uppercase tracking-widest shadow-lg shadow-gold/20 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-all duration-300 hover:scale-[1.02] active:scale-95 text-sm">
-                        Buy Now
-                    </button>
-                    <button className="flex-1 bg-white/5 border border-white/20 text-white py-4 px-8 rounded-2xl font-bold uppercase tracking-widest hover:bg-white/10 hover:border-white/40 transition-all duration-300 active:scale-95 text-sm flex items-center justify-center gap-2">
+                <div className="flex flex-col gap-4 mb-12">
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <button className="flex-1 bg-gradient-to-r from-[#d4af37] to-yellow-600 text-black py-4 px-8 rounded-2xl font-bold uppercase tracking-widest shadow-lg shadow-gold/20 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-all duration-300 hover:scale-[1.02] active:scale-95 text-sm">
+                            Order Now
+                        </button>
+                        <button className="flex-1 bg-white/5 border border-white/20 text-white py-4 px-8 rounded-2xl font-bold uppercase tracking-widest hover:bg-white/10 hover:border-white/40 transition-all duration-300 active:scale-95 text-sm flex items-center justify-center gap-2">
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                            Wishlist
+                        </button>
+                    </div>
+                    
+                    <Link href="/" className="w-full bg-transparent border border-gray-600 text-gray-400 py-3 px-8 rounded-2xl font-bold uppercase tracking-widest hover:bg-gray-800 hover:text-white transition-all duration-300 active:scale-95 text-sm flex items-center justify-center gap-2 mt-2">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
-                        Wishlist
-                    </button>
+                        Back to Home
+                    </Link>
                 </div>
 
                 {/* Trust Badges */}
